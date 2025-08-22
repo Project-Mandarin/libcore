@@ -1,0 +1,46 @@
+name: Build
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+  pull_request:
+    paths-ignore:
+      - 'README.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  GO_VERSION: 1.24.2
+
+jobs:
+  libcore:
+    name: build
+    runs-on: ubuntu-latest
+    container:
+      image: cimg/android:2023.09-ndk
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Setup Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Build
+        working-directory: scripts
+        run: bash -x ./build.sh
+
+      - name: Calculate MD5 checksum
+        run: echo "MD5=$(md5sum libcore.aar | cut -d ' ' -f 1)" >> $GITHUB_ENV
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: libcore-${{ env.MD5 }}
+          path: libcore.aar
