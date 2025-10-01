@@ -11,25 +11,21 @@ if [ -z "$GOPATH" ]; then
 fi
 
 PATH="$PATH:$GOPATH/bin"
-
+GOMOBILE_VERSION="v0.0.0-20231127183840-76ac6878050a"
 # Install gomobile
-if [ ! -f "$GOPATH/bin/gomobile-matsuri" ]; then
-  git clone https://github.com/MatsuriDayo/gomobile ../gomobile
-  cd ../gomobile
-  go install -v ./cmd/gomobile/
-  cd - &>/dev/null && rm -rf ../gomobile
-  mv -v "$GOPATH/bin/gomobile" "$GOPATH/bin/gomobile-matsuri"
+if [ ! -f "$GOPATH/bin/gomobile" ]; then
+  go get -v "golang.org/x/mobile@$GOMOBILE_VERSION"
+  go install -v "$GOPATH/pkg/mod/golang.org/x/mobile@$GOMOBILE_VERSION/cmd/gomobile"
 fi
 
-gomobile-matsuri init
+gomobile init
 
 cd ..
 
-go get -v golang.org/x/mobile@v0.0.0-20231108233038-35478a0c49da
-gomobile-matsuri bind -v \
-                      -androidapi 21 \
-                      -trimpath \
-                      -ldflags='-s -w' \
-                      -tags='with_conntrack,with_gvisor,with_quic,with_wireguard,with_utls,with_clash_api,with_ech' .
+gomobile bind -v \
+              -androidapi 21 \
+              -trimpath \
+              -ldflags='-s -w' \
+              -tags='with_conntrack,with_gvisor,with_quic,with_wireguard,with_utls,with_clash_api,with_ech' .
 
-rm -v "$GOPATH/bin/gomobile-matsuri" "$GOPATH/bin/gobind" libcore-sources.jar
+rm -v "$GOPATH/bin/gomobile" "$GOPATH/bin/gobind" libcore-sources.jar
