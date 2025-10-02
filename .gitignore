@@ -4,3 +4,5 @@ binary*.go
 .vscode
 /debug.go
 .build
+libneko
+sing-box
