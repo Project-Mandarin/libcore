@@ -13,12 +13,6 @@ if [ -z "$ANDROID_HOME" ]; then
 fi
 
 export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/25.2.9519653"
-export NDK="$ANDROID_NDK_HOME"
-
-if [[ ! -f "$ANDROID_NDK_HOME/source.properties" ]]; then
-  echo "ERROR: Android NDK not found!"
-  exit 1
-fi
 
 DEPS=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin
 
