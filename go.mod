@@ -12,7 +12,7 @@ require (
 	github.com/sagernet/sing-box v1.0.0 // replaced
 	github.com/sagernet/sing-dns v0.4.1
 	github.com/sagernet/sing-tun v0.6.1
-	github.com/ulikunitz/xz v0.5.11
+	github.com/ulikunitz/xz v0.5.15
 	golang.org/x/sys v0.31.0
 )
 
@@ -89,4 +89,7 @@ require (
 )
 
 replace github.com/matsuridayo/libneko => ./libneko
+
 replace github.com/sagernet/sing-box => ./sing-box
+
+replace github.com/go-chi/chi/v5 v5.2.1 => github.com/go-chi/chi/v5 v5.2.2
