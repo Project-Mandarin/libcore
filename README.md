@@ -3,5 +3,5 @@
 ## Build
 
 ```
-cd ./scripts/ && bash -x ./build.sh
+bash -x ./scripts/build.sh
 ```
