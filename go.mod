@@ -5,7 +5,7 @@ go 1.23.1
 toolchain go1.23.6
 
 require (
-	github.com/matsuridayo/libneko v1.0.0 // replaced
+	github.com/matsuridayo/libneko v0.0.0-20240702024904-1c47a3af7199
 	github.com/miekg/dns v1.1.63
 	github.com/oschwald/maxminddb-golang v1.12.0 // indirect
 	github.com/sagernet/sing v0.6.6-0.20250406121928-926a5a1e8bb7
@@ -88,8 +88,6 @@ require (
 	lukechampine.com/blake3 v1.3.0 // indirect
 )
 
-replace github.com/matsuridayo/libneko => ./libneko
-
-replace github.com/sagernet/sing-box => ./sing-box
+replace github.com/sagernet/sing-box => github.com/matsuridayo/sing-box v0.0.0-20250410121602-01b72e129794
 
 replace github.com/go-chi/chi/v5 v5.2.1 => github.com/go-chi/chi/v5 v5.2.2
