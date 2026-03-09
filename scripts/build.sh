@@ -15,6 +15,7 @@ GOMOBILE_URL=github.com/sagernet/gomobile
 GOMOBILE_VERSION="v0.1.4"
 
 cd "$SCRIPT_DIR/../"
+go mod tidy -v
 
 # Install gomobile
 if [ ! -f "$GOPATH/bin/gomobile" ]; then
@@ -28,6 +29,7 @@ gomobile bind -v \
               -trimpath \
               -buildvcs=false \
               -ldflags='-s -w -buildid=' \
-              -tags='with_conntrack,with_gvisor,with_quic,with_wireguard,with_utls,with_clash_api,with_ech' .
+              -tags='with_conntrack,with_gvisor,with_quic,with_wireguard,with_utls,with_ech' .
 
+md5sum libcore.aar
 rm -v "$GOPATH/bin/gomobile" "$GOPATH/bin/gobind" "$SCRIPT_DIR/../libcore-sources.jar"
